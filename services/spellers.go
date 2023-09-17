@@ -1,6 +1,6 @@
 package services
 
-import "example.com/kode-notes/spellers"
+import "github.com/ztx-lyghters/kode-notes/spellers"
 
 type Speller interface {
 	spellers.Speller

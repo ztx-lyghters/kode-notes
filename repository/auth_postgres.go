@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"example.com/kode-notes/core"
+	"github.com/ztx-lyghters/kode-notes/core"
 )
 
 type AuthPostgres struct {

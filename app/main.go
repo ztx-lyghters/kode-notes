@@ -3,11 +3,11 @@ package main
 import (
 	"net/http"
 
-	"example.com/kode-notes/config"
-	"example.com/kode-notes/handlers"
-	"example.com/kode-notes/repository"
-	"example.com/kode-notes/server"
-	"example.com/kode-notes/services"
+	"github.com/ztx-lyghters/kode-notes/config"
+	"github.com/ztx-lyghters/kode-notes/handlers"
+	"github.com/ztx-lyghters/kode-notes/repository"
+	"github.com/ztx-lyghters/kode-notes/server"
+	"github.com/ztx-lyghters/kode-notes/services"
 	"github.com/sirupsen/logrus"
 )
 

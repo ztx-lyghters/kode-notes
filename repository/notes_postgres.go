@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 
-	"example.com/kode-notes/core"
+	"github.com/ztx-lyghters/kode-notes/core"
 )
 
 type NotesPostgres struct {

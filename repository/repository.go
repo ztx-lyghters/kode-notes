@@ -3,7 +3,7 @@ package repository
 import (
 	"database/sql"
 
-	"example.com/kode-notes/core"
+	"github.com/ztx-lyghters/kode-notes/core"
 )
 
 type Authorization interface {

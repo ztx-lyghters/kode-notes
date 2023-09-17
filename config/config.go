@@ -4,8 +4,8 @@ import (
 	"errors"
 	"os"
 
-	"example.com/kode-notes/repository"
-	"example.com/kode-notes/server"
+	"github.com/ztx-lyghters/kode-notes/repository"
+	"github.com/ztx-lyghters/kode-notes/server"
 )
 
 type Config struct {

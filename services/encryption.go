@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"example.com/kode-notes/core"
+	"github.com/ztx-lyghters/kode-notes/core"
 )
 
 const (

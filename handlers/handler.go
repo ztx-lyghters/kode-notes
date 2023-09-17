@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"example.com/kode-notes/config"
-	"example.com/kode-notes/services"
+	"github.com/ztx-lyghters/kode-notes/config"
+	"github.com/ztx-lyghters/kode-notes/services"
 )
 
 type Handler struct {

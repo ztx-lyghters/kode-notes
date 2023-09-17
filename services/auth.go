@@ -1,8 +1,8 @@
 package services
 
 import (
-	"example.com/kode-notes/core"
-	"example.com/kode-notes/repository"
+	"github.com/ztx-lyghters/kode-notes/core"
+	"github.com/ztx-lyghters/kode-notes/repository"
 )
 
 type Auth struct {

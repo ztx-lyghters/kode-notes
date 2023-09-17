@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"example.com/kode-notes/core"
+	"github.com/ztx-lyghters/kode-notes/core"
 	"github.com/sirupsen/logrus"
 )
 
