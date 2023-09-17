@@ -1,0 +1,27 @@
+services:
+  kode-notes:
+    build: ./docker/kode-notes/.
+    container_name: kode-notes
+    command: kode-db /usr/local/bin/kode-notes -D kode-db -P qwerty -s "0.0.0.0" -p 8080
+    depends_on:
+      - kode-db
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=qwerty
+    ports:
+      - 8080:8080
+
+  kode-db:
+    build: ./docker/kode-db/.
+    container_name: kode-db
+    command: docker-entrypoint.sh postgres && first-run
+    restart: always
+    image: postgres:latest
+    volumes:
+    - ./.database/postgres/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=qwerty
+    ports:
+      - 5432:5432

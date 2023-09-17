@@ -1,0 +1,18 @@
+CREATE DATABASE kode_notes WITH TEMPLATE template0 ENCODING = 'UTF-8' LC_COLLATE = 'en-US' LC_CTYPE = 'en-US';
+
+\c kode_notes;
+
+CREATE TABLE users (
+	id SERIAL PRIMARY KEY,
+	username VARCHAR(255) NOT NULL UNIQUE,
+	password_hash VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE notes (
+	user_id INT NOT NULL,
+	id SERIAL PRIMARY KEY UNIQUE, 
+	title VARCHAR(255) NOT NULL,
+	description VARCHAR(255),
+	FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE
+		CASCADE
+);

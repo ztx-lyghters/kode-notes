@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+host="$1"
+shift
+
+echo "Waiting for postgres..."
+export PGPASSWORD="$POSTGRES_PASSWORD"
+until psql -h "$host" -U "postgres" -c '\q'; do
+  sleep 2
+done
+echo "Database is up!"
+
+exec $*

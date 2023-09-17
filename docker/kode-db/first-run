@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+file="/usr/share/postgres/done.init"
+[ -f "$file" ] || {
+	su postgres -c docker-entrypoint.sh postgres
+	/usr/local/bin/schema-init "$1" || exit 1
+	touch "$file"
+}
+
+exec su postgres -c docker-entrypoint.sh postgres
