@@ -9,10 +9,13 @@ build: compile
 	docker-compose build kode-notes
 .PHONY: build
 
-compile:
+compile: tests
 	# CGO needs to be disabled for Alpine containers
 	# without libc-compat installed
 	CGO_ENABLED=0 GODEBUG=netdns=go go build -v -o docker/kode-notes/kode-notes app/main.go
+
+tests:
+	go test -v ./...
 
 run:
 	docker-compose up kode-notes --detach
