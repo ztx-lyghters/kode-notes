@@ -18,7 +18,6 @@ func (h *Handler) ServeHTTP(w http.ResponseWriter,
 	r *http.Request) {
 
 	w.Header().Set("content-type", "application/json")
-	defer r.Body.Close()
 
 	switch {
 	case AUTH_REGEX.MatchString(r.URL.Path):

@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/ztx-lyghters/kode-notes/core"
 	"github.com/sirupsen/logrus"
+	"github.com/ztx-lyghters/kode-notes/core"
 )
 
 func (h *Handler) GetAll(w http.ResponseWriter,
@@ -44,10 +44,7 @@ func (h *Handler) Create(w http.ResponseWriter,
 		return
 	}
 
-	reply, err := h.services.SpellerService.Yandex.Check([]string{
-		note.Title,
-		note.Description,
-	})
+	reply, err := h.services.SpellerService.Yandex.Check(&note.Title, &note.Description)
 	if err != nil {
 		logrus.Error("Spellcheck error: " + err.Error())
 	} else {

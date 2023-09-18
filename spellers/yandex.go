@@ -31,6 +31,7 @@ type corrections struct {
 
 type YandexSpeller struct {
 	Config map[string]interface{}
+	URL    string
 }
 
 func NewYandexSpeller() *YandexSpeller {
@@ -41,25 +42,14 @@ func NewYandexSpeller() *YandexSpeller {
 			"lang":   "",
 			"format": "",
 		},
+		URL: YA_SPELLER_URL,
 	}
 }
 
-func (s *YandexSpeller) Prepare(cfg map[string]interface{}) {
-	for k, v := range cfg {
-		_, exist := s.Config[k]
-		if exist {
-			s.Config[k] = v
-		} else {
-			logrus.Errorf("YandexSpeller.Prepare(): "+
-				"unknown key '%s'", fmt.Sprint(k))
-		}
-	}
-}
-
-func (s *YandexSpeller) Check(texts []string) (*[][]corrections, error) {
+func (s *YandexSpeller) Check(texts ...*string) (*[][]corrections, error) {
 	var result [][]corrections
 
-	if texts == nil || strings.TrimSpace(texts[0]) == "" {
+	if texts == nil || strings.TrimSpace(*texts[0]) == "" {
 		return nil, errors.New("empty text field")
 	}
 
@@ -68,12 +58,12 @@ func (s *YandexSpeller) Check(texts []string) (*[][]corrections, error) {
 		data.Add(k, fmt.Sprint(v))
 	}
 	for _, v := range texts {
-		if strings.TrimSpace(v) != "" {
-			data.Add("text", v)
+		if strings.TrimSpace(*v) != "" {
+			data.Add("text", *v)
 		}
 	}
 
-	r, err := http.PostForm(YA_SPELLER_URL, data)
+	r, err := http.PostForm(s.URL, data)
 	if err != nil {
 		return nil, err
 	}
@@ -114,6 +104,7 @@ func (s *YandexSpeller) Fix(c_arr *[][]corrections, str ...*string) {
 	}
 }
 
+// Dirty cyrillic problem solution via runes
 func applySuggestion(text string, c corrections) string {
 	runes := []rune(text)
 	suggestion := []rune(c.Sgst[0])

@@ -1,7 +1,6 @@
 package spellers
 
 type Speller interface {
-	Check([]string) (*[][]corrections, error)
-	Prepare(map[string]interface{})
+	Check(...*string) (*[][]corrections, error)
 	Fix(*[][]corrections, ...*string)
 }

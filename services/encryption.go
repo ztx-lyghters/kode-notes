@@ -16,8 +16,15 @@ import (
 const (
 	TOKEN_TTL  = 60 * time.Minute
 	JWT_HEADER = `{"alg":"HS256","typ":"JWT"}`
-	HASH_SALT  = "TheSaltiestSaltOfSaltiestSaltsOutThere"
-	SIGN_KEY   = "ASuperSecretPrivateSigningKey"
+
+	// Quick and dirty security theater.
+	// At least the JWT signing key shoud probably
+	// be generated at runtime, so it is different
+	// every time. Might intoduce "inconvenience"
+	// if the server gets down, but I'd take security
+	// over convenience. For now it's hardcoded.
+	HASH_SALT = "TheSaltiestSaltOfSaltiestSaltsOutThere"
+	SIGN_KEY  = "ASuperSecretPrivateSigningKey"
 )
 
 func (s *Auth) ValidateToken(token string) (int, error) {
@@ -94,6 +101,8 @@ func (s *Auth) ValidateToken(token string) (int, error) {
 	return int(user_id), nil
 }
 
+// Probably should take a payload argument, in order
+// to encode different things, but no time for that :)
 func assembleTokenJWT(user *core.User) string {
 	payloadJSON := fmt.Sprintf(
 		`{"user_id":%d,"iat":%d}`,
