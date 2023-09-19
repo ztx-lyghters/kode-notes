@@ -2,7 +2,8 @@
 
 ## Запуск
 
-Для запуска требуются `go`, `docker`, `docker-compose`, `GNU Make`
+Для запуска требуются `go`, `docker`, `docker-compose`, `GNU Make`.\
+Используются библиотеки [sirupsen/logrus](https://github.com/sirupsen/logrus) и [lib/pq](https://github.com/lib/pq)
 ___
 Для полной пересборки и запуска:\
 `make all` или `make all-attach`
