@@ -25,11 +25,11 @@ ___
 Список аргументов и примеров:
 `./interact.sh -h`
 
-Регистрация нового пользователя:
+Регистрация нового пользователя:\
 `./interact.sh -u johndoe -p qwerty1234 sign_up`
 
-Аутентификация и получение токена авторизации:
-`./interact.sh -u johndoe -p qwerty1234 sign_in\`
+Аутентификация и получение токена авторизации:\
+`./interact.sh -u johndoe -p qwerty1234 sign_in`
 
 Зная токен, можно обратиться к двум оставшимся методам:\
 `./interact.sh -T "asdfghjkl0987654321" -n foo -d bar new_note`\
