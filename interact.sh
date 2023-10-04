@@ -42,7 +42,7 @@ _printHelp() {
 
   Example:
     $(basename "$0") -P 8000 -t \"qwerasdfzxcv\" \\
-      -n \"My new note\" -d \"Just testing notes\""
+      -n \"My new note\" -d \"Just testing notes\" new_note"
 }
 
 [ $# -lt 1 ] && {
