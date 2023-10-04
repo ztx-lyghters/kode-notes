@@ -15,7 +15,12 @@ compile: tests
 	CGO_ENABLED=0 GODEBUG=netdns=go go build -v -o docker/kode-notes/kode-notes app/main.go
 
 tests:
-	go test -v ./...
+	go test -count=1 -race -v ./...
+
+coverage:
+	go test -count=1 -race -coverprofile=coverage.out -v ./...
+	go tool cover -html=coverage.out
+	rm coverage.out
 
 run:
 	docker-compose up kode-notes --detach
