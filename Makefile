@@ -46,6 +46,10 @@ attach:
 	@read -r enter
 	docker-compose up
 
+genmocks:
+	mockgen -source=repository/repository.go \
+		-destination=mocks/repository.go -package=mocks
+
 clean:
 	docker-compose stop || true
 	docker-compose rm -f || true
