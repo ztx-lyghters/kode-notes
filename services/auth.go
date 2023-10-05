@@ -13,7 +13,7 @@ func NewAuthService(repo *repository.Repository) *Auth {
 	return &Auth{repository: repo}
 }
 
-func (s *Auth) CreateUser(user *core.User) (int, error) {
+func (s *Auth) CreateUser(user *core.User) (uint, error) {
 
 	user.Password = GeneratePasswordHash(user.Password)
 	user_id, err := s.repository.CreateUser(user)
@@ -36,6 +36,6 @@ func (s *Auth) GenerateToken(user *core.User) (string, error) {
 	return assembleTokenJWT(user), nil
 }
 
-func (s *Auth) CheckUserExistence(user_id int) bool {
+func (s *Auth) CheckUserExistence(user_id uint) bool {
 	return s.repository.CheckUserExistence(user_id)
 }

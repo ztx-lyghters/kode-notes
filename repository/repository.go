@@ -7,14 +7,14 @@ import (
 )
 
 type Authorization interface {
-	CreateUser(*core.User) (int, error)
+	CreateUser(*core.User) (uint, error)
 	GetUser(string, string) (*core.User, error)
-	CheckUserExistence(int) bool
+	CheckUserExistence(uint) bool
 }
 
 type Notes interface {
-	CreateNote(*core.Note) (int, error)
-	GetAllNotes(int) ([]*core.Note, error)
+	CreateNote(*core.Note) (uint, error)
+	GetAllNotes(uint) ([]*core.Note, error)
 }
 
 type Repository struct {

@@ -41,7 +41,7 @@ func (h *Handler) userIdentify(w http.ResponseWriter,
 	return nil
 }
 
-func getUserId(w http.ResponseWriter, r *http.Request) (int, error) {
+func getUserId(w http.ResponseWriter, r *http.Request) (uint, error) {
 	id := r.Header.Get(USER_CTX)
 	if id == "" {
 		err := errors.New("user id not found")
@@ -49,12 +49,12 @@ func getUserId(w http.ResponseWriter, r *http.Request) (int, error) {
 		return 0, err
 	}
 
-	id_int, err := strconv.Atoi(id)
+	id_int, err := strconv.ParseUint(id, 10, 0)
 	if err != nil {
 		err := errors.New("user id not found 2")
 		NewErrorResponse(w, http.StatusInternalServerError, err.Error())
 		return 0, err
 	}
 
-	return id_int, nil
+	return uint(id_int), nil
 }

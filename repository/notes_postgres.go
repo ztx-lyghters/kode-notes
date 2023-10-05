@@ -15,8 +15,8 @@ func NewNotesPostgres(db *sql.DB) *NotesPostgres {
 	return &NotesPostgres{db: db}
 }
 
-func (r *NotesPostgres) CreateNote(note *core.Note) (int, error) {
-	var id int
+func (r *NotesPostgres) CreateNote(note *core.Note) (uint, error) {
+	var id uint
 
 	query := fmt.Sprintf("INSERT INTO %s (user_id, title, description) VALUES ($1, $2, $3) RETURNING id", NOTES_TABLE)
 
@@ -31,7 +31,7 @@ func (r *NotesPostgres) CreateNote(note *core.Note) (int, error) {
 	return id, nil
 }
 
-func (r *NotesPostgres) GetAllNotes(user_id int) ([]*core.Note, error) {
+func (r *NotesPostgres) GetAllNotes(user_id uint) ([]*core.Note, error) {
 	var notes []*core.Note
 
 	query := fmt.Sprintf("SELECT * FROM %s WHERE "+

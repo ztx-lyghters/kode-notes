@@ -16,9 +16,9 @@ func NewAuthPostgres(db *sql.DB) *AuthPostgres {
 	return &AuthPostgres{db: db}
 }
 
-func (r *AuthPostgres) CreateUser(user *core.User) (int, error) {
+func (r *AuthPostgres) CreateUser(user *core.User) (uint, error) {
 
-	var id int
+	var id uint
 
 	query := fmt.Sprintf("INSERT INTO %s(username, "+
 		"password_hash) VALUES ($1, $2) RETURNING id",
@@ -32,7 +32,7 @@ func (r *AuthPostgres) CreateUser(user *core.User) (int, error) {
 	return id, nil
 }
 
-func (r *AuthPostgres) CheckUserExistence(user_id int) bool {
+func (r *AuthPostgres) CheckUserExistence(user_id uint) bool {
 	var username string
 	query := fmt.Sprintf("SELECT username FROM %s WHERE id=$1", USERS_TABLE)
 	row := r.db.QueryRow(query, user_id)

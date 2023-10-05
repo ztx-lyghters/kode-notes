@@ -6,15 +6,15 @@ import (
 )
 
 type AuthorizationService interface {
-	CreateUser(*core.User) (int, error)
+	CreateUser(*core.User) (uint, error)
 	GenerateToken(*core.User) (string, error)
-	ValidateToken(string) (int, error)
-	CheckUserExistence(int) bool
+	ValidateToken(string) (uint, error)
+	CheckUserExistence(uint) bool
 }
 
 type NotesService interface {
-	Create(*core.Note) (int, error)
-	GetAll(user_id int) ([]*core.Note, error)
+	Create(*core.Note) (uint, error)
+	GetAll(user_id uint) ([]*core.Note, error)
 }
 
 type SpellerService struct {

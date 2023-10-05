@@ -1,6 +1,7 @@
 package services
 
 import (
+	"bytes"
 	"crypto/hmac"
 	"crypto/sha256"
 	"encoding/base64"
@@ -27,7 +28,7 @@ const (
 	SIGN_KEY  = "ASuperSecretPrivateSigningKey"
 )
 
-func (s *Auth) ValidateToken(token string) (int, error) {
+func (s *Auth) ValidateToken(token string) (uint, error) {
 	var header_map, claims map[string]interface{}
 
 	segments := strings.Split(token, ".")
@@ -39,6 +40,12 @@ func (s *Auth) ValidateToken(token string) (int, error) {
 		DecodeString(segments[0])
 	if err != nil {
 		return 0, errors.New("invalid header format")
+	}
+	if !bytes.Contains(header, []byte(`"typ":"JWT"`)) {
+		return 0, errors.New("invalid header: expecting JWT")
+	}
+	if !bytes.Contains(header, []byte(`"alg":"HS256"`)) {
+		return 0, errors.New("invalid header: expecting HS256")
 	}
 
 	payload, err := base64.RawURLEncoding.
@@ -98,7 +105,7 @@ func (s *Auth) ValidateToken(token string) (int, error) {
 		return 0, fmt.Errorf(fmt.Sprintf("invalid user_id field - %f", user_id))
 	}
 
-	return int(user_id), nil
+	return uint(user_id), nil
 }
 
 // Probably should take a payload argument, in order

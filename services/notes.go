@@ -13,10 +13,10 @@ func NewNotesService(repo *repository.Repository) *Notes {
 	return &Notes{repository: repo}
 }
 
-func (s *Notes) Create(note *core.Note) (int, error) {
+func (s *Notes) Create(note *core.Note) (uint, error) {
 	return s.repository.CreateNote(note)
 }
 
-func (s *Notes) GetAll(user_id int) ([]*core.Note, error) {
+func (s *Notes) GetAll(user_id uint) ([]*core.Note, error) {
 	return s.repository.GetAllNotes(user_id)
 }

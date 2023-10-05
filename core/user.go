@@ -1,7 +1,7 @@
 package core
 
 type User struct {
-	Id       int    `json:"-"`
+	Id       uint   `json:"-"`
 	Username string `json:"username"`
 	Password string `json:"password"`
 }
