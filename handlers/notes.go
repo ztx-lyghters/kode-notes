@@ -47,9 +47,11 @@ func (h *Handler) Create(w http.ResponseWriter,
 	reply, err := h.services.SpellerService.Yandex.Check(&note.Title, &note.Description)
 	if err != nil {
 		logrus.Error("Spellcheck error: " + err.Error())
-	} else {
-		h.services.SpellerService.Yandex.Fix(reply,
-			&note.Title, &note.Description)
+	}
+	err = h.services.SpellerService.Yandex.Fix(reply,
+		&note.Title, &note.Description)
+	if err != nil {
+		logrus.Error("Spellcheck.Fix() error: " + err.Error())
 	}
 
 	if strings.TrimSpace(note.Title) == "" {

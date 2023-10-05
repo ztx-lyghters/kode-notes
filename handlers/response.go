@@ -14,7 +14,7 @@ func NewErrorResponse(w http.ResponseWriter, status_code int, message string) {
 	})
 }
 
-func newJSONResponse(w http.ResponseWriter, status_code int, data any) {
+func newJSONResponse(w http.ResponseWriter, status_code int, data interface{}) {
 	w.Header().Set("Content-Type",
 		"application/json; charset=utf-8",
 	)

@@ -8,8 +8,6 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-
-	"github.com/sirupsen/logrus"
 )
 
 const (
@@ -49,8 +47,10 @@ func NewYandexSpeller() *YandexSpeller {
 func (s *YandexSpeller) Check(texts ...*string) (*[][]corrections, error) {
 	var result [][]corrections
 
-	if texts == nil || strings.TrimSpace(*texts[0]) == "" {
-		return nil, errors.New("empty text field")
+	for _, str := range texts {
+		if str == nil || strings.TrimSpace(*texts[0]) == "" {
+			return nil, errors.New("empty text field")
+		}
 	}
 
 	data := url.Values{}
@@ -82,12 +82,11 @@ func (s *YandexSpeller) Check(texts ...*string) (*[][]corrections, error) {
 	return &result, nil
 }
 
-func (s *YandexSpeller) Fix(c_arr *[][]corrections, str ...*string) {
+func (s *YandexSpeller) Fix(c_arr *[][]corrections, str ...*string) error {
 	if len(*c_arr) > len(str) {
-		logrus.Error("YandexSpeller.Fix(): array with " +
+		return errors.New("YandexSpeller.Fix(): array with " +
 			"spellchecks is bigger than number of " +
 			"supplied strings")
-		return
 	}
 
 	for i, corrects := range *c_arr {
@@ -102,6 +101,8 @@ func (s *YandexSpeller) Fix(c_arr *[][]corrections, str ...*string) {
 
 		*str[i] = text
 	}
+
+	return nil
 }
 
 // Dirty cyrillic problem solution via runes
